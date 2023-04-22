@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>销售人员页面</title>
+    <link th:href="@{/css/style.default.css}"  rel="stylesheet"  type="text/css" />
+</head>
+
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="topheader">
+        <div class="left">
+            <h1 class="logo">欢迎，<span>销售人员</span></h1>
+            <span class="slogan">销售管理系统</span>
+
+            <br clear="all" />
+
+        </div><!--left-->
+
+        <div class="right">
+            <!--<div class="notification">
+                <a class="count" href="ajax/notifications.html"><span>9</span></a>
+            </div>-->
+
+        </div><!--right-->
+    </div><!--topheader-->
+
+
+    <div class="header">
+        <ul class="headermenu">
+            <li class="current"><a href="/tosaCustomer"><span class="icon icon-customer"></span>客户管理</a></li>
+            <li><a href="/tosaProduct"><span class="icon icon-project"></span>产品管理</a></li>
+            <li><a href="/tosaOrder"><span class="icon icon-order"></span>订单管理</a></li>
+            <li><a href="/tosaSales"><span class="icon icon-salesman"></span>个人管理</a></li>
+        </ul>
+    </div><!--header-->
+
+    <div class="vernav2 iconmenu">
+        <ul>
+            <li><a href="/toSelect" class="find">客户查询</a></li>
+            <!--            <li><a href="/toPage?url=/ad_cuadd.html" class="add">增添客户</a></li>-->
+
+            <!--            <form action="/add" method="post">-->
+            <li><a href="/toAdd" class="add">增添客户</a></li>
+            <!--            </form>-->
+
+            <!--            <li><a href="/toPage?url=/ad_cudel.html" class="delet">删减客户</a></li>-->
+            <li><a href="/toUpdate" class="revise">修改信息</a></li>
+        </ul>
+        <br /><br />
+    </div><!--leftmenu-->
+
+    <div class="centercontent">
+        <div id="contentwrapper" class="contentwrapper">
+            <div class="search">
+                <form action="/select" method="post">
+                    <input type="text" name="Id" id="Id" value="请输入要查找的客户ID" />
+                    <button class="submitbutton"></button>
+                </form>
+            </div><!--search-->
+            <br /><br />
+            <div class="contenttitle2">
+                <h3>您查询的客户信息：</h3>
+            </div><!--contenttitle-->
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="dyntable">
+                <colgroup>
+                    <col class="con0" />
+                    <col class="con1" />
+                    <col class="con0" />
+                    <col class="con1" />
+                    <col class="con0" />
+                    <col class="con1" />
+                    <col class="con0" />
+                    <col class="con1" />
+                    <col class="con0" />
+                </colgroup>
+                <thead>
+
+                <tr>
+                    <th class="head0">ID</th>
+                    <th class="head1">Name</th>
+                    <th class="head0">PassWord</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                </tr>
+                </tbody>
+            </table>
+            <br />
+            <div class="contenttitle2">
+                <h3>客户信息</h3>
+            </div><!--contenttitle-->
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="dyntable2">
+                <form action="/delete" method="post">
+                    <tr>
+                        <td>
+                            <input type="submit" value="delete">
+                        </td>
+                    </tr>
+                    <colgroup>
+                        <col class="con1" />
+                        <col class="con0" />
+                        <col class="con1" />
+                        <col class="con0" />
+
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="head1">choose</th>
+                        <th class="head0">ID</th>
+                        <th class="head1">Name</th>
+                        <th class="head0">PassWord</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--/*@thymesVar id="pages" type=""*/-->
+                    <tr  th:each="cs : ${pages}" th:inline="none">
+                        <td>
+                            <input type="checkbox" name="ids" th:value="${cs.getId()}">
+                        </td>
+                        <td th:text="${cs.getId()}"></td>
+                        <td th:text="${cs.getName()}"></td>
+                        <td th:text="${cs.getPassword()}"></td>
+<!--                        <td th:text="${cs.getSex()}"></td>-->
+<!--                        <td th:text="${cs.getAddress()}"></td>-->
+<!--                        <td th:text="${cs.getPhone()}"></td>-->
+<!--                        <td th:text="${cs.getVX()}"></td>-->
+<!--                        <td th:text="${cs.getQQ()}"></td>-->
+<!--                        <td th:text="${cs.getEmail()}"></td>-->
+                        <!--                    <td><a th:href="${'/select/'+cs.getId()}" >select</a></td>-->
+                        <!--                    <td ><a th:href="${'/edit/'+cs.getId()}">edit</a></td>-->
+                        <!--                    <td><a th:href="${'/del/'+user.userId}" >delete</a></td>-->
+                    </tr>
+                    </tbody>
+                </form>
+            </table>
+        </div><!--contentwrapper-->
+    </div><!-- centercontent -->
+
+
+</div><!--bodywrapper-->
+
+</body>
+</html>

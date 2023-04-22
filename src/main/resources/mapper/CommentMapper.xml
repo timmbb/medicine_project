@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springproje.mapper.CommentMapper">
+    <update id="updateandmodify">
+        update comment
+        set  content=#{content},gmt_modified=unix_timestamp()
+        where commentator=#{id} and parent_id=#{tid}
+    </update>
+
+    <select id="selectCommentbytalkId" resultType="com.example.springproje.dto.CommentDTO">
+        select comment.*,users.name
+        from comment,users
+        where comment.parent_id=#{tid}
+        and comment.commentator=users.id
+    </select>
+</mapper>

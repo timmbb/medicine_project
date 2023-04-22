@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springproje.mapper.TalkMapper">
+    <update id="updateandmodify">
+        update talk
+        set  title=#{title},description=#{description},ttype=#{ttype},images=#{images},gmt_modified=unix_timestamp(),introduction=#{introduction}
+        where creator=#{creator}
+    </update>
+
+    <select id="Orderbylike" resultType="com.example.springproje.bean.Talk">
+        select *
+        from talk
+        order by like_count desc
+    </select>
+
+    <select id="Orderbycomment" resultType="com.example.springproje.bean.Talk">
+        select *
+        from talk
+        order by comment_count desc
+    </select>
+
+    <select id="Selectbyword" parameterType="String" resultType="com.example.springproje.dto.TalkDTO">
+        select talk.*,users.name
+        from talk,users
+        where ttype like concat ("%",#{typeword},"%")
+        and description like concat ("%",#{descripword},"%")
+        and talk.creator=users.id
+    </select>
+
+    <select id="selectCollectiontalkbyUserid" resultType="com.example.springproje.dto.CollectionDTO">
+        select distinct talk.tid,talk.creator,users.name,talk.title,talk.introduction
+        from users,talk,collection
+        where collection.user_id=#{id}
+        and talk.tid=collection.post_id
+        and users.id=talk.creator;
+    </select>
+
+    <select id="selectlikebyUserid" resultType="com.example.springproje.dto.LikeInfoDTO">
+        select distinct talk.tid,talk.creator,users.name,talk.title,talk.introduction
+        from users,talk,likes
+        where likes.like_user_id=#{id}
+        and talk.tid=likes.info_id
+        and users.id=talk.creator;
+    </select>
+
+    <select id="selectdetailtalk" resultType="com.example.springproje.dto.TalkDTO">
+        select talk.*,users.name
+        from talk,users
+        where talk.tid=#{tid}
+        and talk.creator=users.id
+    </select>
+
+    <select id="selectalltalk" resultType="com.example.springproje.dto.TalkDTO">
+        select talk.*,users.name
+        from talk,users
+        where talk.creator=users.id
+    </select>
+</mapper>
