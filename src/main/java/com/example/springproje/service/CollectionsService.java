@@ -2,6 +2,7 @@ package com.example.springproje.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.springproje.bean.Collections;
+import com.example.springproje.dto.CollectionDTO;
 import com.example.springproje.mapper.CollectionsMapper;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +13,23 @@ import java.util.List;
 public class CollectionsService {
     @Resource
     private CollectionsMapper collectionMapper;
+    @Resource
+    private TalkService talkService;
 
-    public Collections insert(Integer talkid, Integer userid){
+    public List<CollectionDTO> insert(Integer talkid, Integer userid){
         Collections collection=new Collections();
         collection.setPostId(talkid);
         collection.setUserId(userid);
         collectionMapper.insert(collection);
-        return collection;
+        return talkService.selectCollectiontalkbyUserid(userid);
     }
 
-    public int remove(Integer talkid,Integer userid){
+    public List<CollectionDTO> remove(Integer talkid, Integer userid){
         QueryWrapper<Collections> collectionQueryWrapper=new QueryWrapper<>();
         collectionQueryWrapper.eq("post_id",talkid);
         collectionQueryWrapper.eq("user_id",userid);
-
-        return collectionMapper.delete(collectionQueryWrapper);
+        collectionMapper.delete(collectionQueryWrapper);
+        return talkService.selectCollectiontalkbyUserid(userid);
     }
 
 

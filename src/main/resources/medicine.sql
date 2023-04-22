@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS `collection` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `post_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `agdkey` (`post_id`,`user_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COMMENT='收藏表';
 
 --
@@ -67,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
 --
 
 INSERT INTO `comment` (`cid`, `parent_id`, `ctype`, `commentator`, `gmt_create`, `gmt_modified`, `like_count`, `content`, `comment_count`) VALUES
-(1, 1, 0, 2, '1606641726000', '1606641726000', 0, 'sad', 0);
+(2, 1, 0, 2, '1606641726000', '1606641726000', 0, 'sad', 0);
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
 INSERT INTO `likes` (`lid`, `info_id`, `create_time`, `like_user_id`, `update_time`, `status`) VALUES
 (1, 1, '1682147777750', 2, '0', 1),
 (2, 1, '1682147860430', 1, '0', 1),
-(3, 2, '1682148087020', 1, '0', 1);
+(3, 2, '1682148087020', 2, '0', 1);
 
 -- --------------------------------------------------------
 

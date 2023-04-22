@@ -11,6 +11,7 @@ import com.example.springproje.dto.ResultDTO;
 import com.example.springproje.mapper.CommentMapper;
 import com.example.springproje.mapper.UserMapper;
 import com.example.springproje.service.CommentService;
+import com.example.springproje.service.TalkService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,14 +29,16 @@ public class CommentController {
     private CommentMapper commentMapper;
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private TalkService talkService;
 
     @ResponseBody
     @RequestMapping(value = "/add_comment",method = RequestMethod.POST)
     public Object add_comment(@CurrentUserId Integer id, String content,Integer tid)
     {
-        User user = userMapper.selectById(id);
         Comment comment=commentService.insert(id,content,tid);
-        return ResultDTO.okOf(comment);
+        talkService.updatecommentcount(tid);
+        return ResultDTO.okOf();
 //        return "";
     }
 
@@ -46,7 +49,7 @@ public class CommentController {
         User user = userMapper.selectById(id);
         return  ResultDTO.okOf(commentService.update(id,content,tid));
     }
-
+/*
     @ResponseBody
     @RequestMapping(value = "/delete_comment",method = RequestMethod.GET)
     public Object delete_comment(@CurrentUserId Integer id,Integer cid)
@@ -56,7 +59,7 @@ public class CommentController {
         QueryWrapper<Comment> commentQueryWrapper=new QueryWrapper<>();
         commentQueryWrapper.eq("commentator",id);
         return ResultDTO.okOf(commentMapper.selectList(commentQueryWrapper));
-    }
+    }*/
 
     /**
      * 查询某个话题的所有评论
