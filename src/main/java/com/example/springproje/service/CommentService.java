@@ -28,7 +28,7 @@ public class CommentService {
         commentMapper.deleteById(comment.getCid());
     }
 
-    public Comment update(Integer id,String content,Integer tid){
+    public CommentDTO update(Integer id,String content,Integer tid){
         return commentMapper.updateandmodify(id, content,tid);
     }
 

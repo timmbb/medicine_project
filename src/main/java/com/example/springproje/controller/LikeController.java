@@ -1,6 +1,7 @@
 package com.example.springproje.controller;
 
 import com.example.springproje.annotation.CurrentUserId;
+import com.example.springproje.service.LikeService;
 import com.example.springproje.service.TalkService;
 import com.example.springproje.utils.RedisUtils;
 import org.springframework.beans.BeanUtils;
@@ -32,18 +33,22 @@ public class LikeController {
     private UserMapper userMapper;
     @Resource
     private TalkService talkService;
+    @Resource
+    private LikeService likeService;
 
     @DeleteMapping("/remove_like")
     @ResponseBody
     public Object removeLike(@CurrentUserId Integer id,Integer tid) {
-        redisUtils.unLikes(tid,id);
+//        redisUtils.unLikes(tid,id);
+        likeService.remove(tid,id);
         return ResultDTO.okOf(talkService.updatelikecount(tid));
     }
 
     @PostMapping("/insert_like")
     @ResponseBody
     public Object insertLike(@CurrentUserId Integer id, Integer tid) {
-        redisUtils.likes(tid,id);
+//        redisUtils.likes(tid,id);
+        likeService.insert(tid,id);
         return ResultDTO.okOf(talkService.updatelikecount(tid));
     }
 

@@ -39,9 +39,9 @@ public class TalkController {
 
     @ResponseBody
     @RequestMapping(value = "/update_talk",method = RequestMethod.POST)
-    public Object update_talk(@CurrentUserId Integer id, String title, String description,String ttype, String images,String introduction)//
+    public Object update_talk(@CurrentUserId Integer id, Integer tid, String title, String description,String ttype, String images,String introduction)//
     {
-        return ResultDTO.okOf(talkService.update(id,title,description,ttype,images,introduction));
+        return ResultDTO.okOf(talkService.update(id,tid,title,description,ttype,images,introduction));
     }
 
     @ResponseBody

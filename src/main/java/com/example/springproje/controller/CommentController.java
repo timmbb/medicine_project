@@ -38,7 +38,7 @@ public class CommentController {
     {
         Comment comment=commentService.insert(id,content,tid);
         talkService.updatecommentcount(tid);
-        return ResultDTO.okOf();
+        return ResultDTO.okOf(commentMapper.selectCommentbytalkId(tid));
 //        return "";
     }
 

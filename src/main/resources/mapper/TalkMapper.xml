@@ -4,7 +4,7 @@
     <update id="updateandmodify">
         update talk
         set  title=#{title},description=#{description},ttype=#{ttype},images=#{images},gmt_modified=unix_timestamp(),introduction=#{introduction}
-        where creator=#{creator}
+        where tid=#{tid}
     </update>
 
     <select id="Orderbylike" resultType="com.example.springproje.bean.Talk">
@@ -54,5 +54,12 @@
         select talk.*,users.name
         from talk,users
         where talk.creator=users.id
+    </select>
+
+    <select id="selecttalkbyuser" resultType="com.example.springproje.dto.TalkDTO">
+        select talk.*,users.name
+        from talk,users
+        where talk.creator=users.id
+        and talk.creator=#{id}
     </select>
 </mapper>

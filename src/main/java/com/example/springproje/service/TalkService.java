@@ -4,6 +4,7 @@ import com.example.springproje.bean.Talk;
 import com.example.springproje.bean.User;
 import com.example.springproje.dto.*;
 import com.example.springproje.mapper.CommentMapper;
+import com.example.springproje.mapper.LikeMapper;
 import com.example.springproje.mapper.TalkMapper;
 import com.example.springproje.utils.RedisUtils;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class TalkService {
     private RedisUtils redisUtils;
     @Resource
     private CommentMapper commentMapper;
+    @Resource
+    private LikeMapper likeMapper;
 
     public Talk insert(Integer id,String title, String description,String ttype, String images,String introduction){
         Talk t=new Talk();
@@ -34,13 +37,10 @@ public class TalkService {
         talkMapper.insert(t);
         return t;
     }
-    public Integer update(Integer creator,String title, String description,String ttype, String images,String introduction){
-        QueryWrapper<Talk> talkQueryWrapper=new QueryWrapper<>();
-        talkQueryWrapper.eq("creator",creator);
-
-        Talk talk=talkMapper.selectOne(talkQueryWrapper);
-//        talk
-        return talkMapper.updateandmodify(creator, title, description,ttype, images,introduction);
+    public List<TalkDTO> update(Integer id,Integer tid,String title, String description,String ttype, String images,String introduction){
+        Talk talk=talkMapper.selectById(tid);
+        talkMapper.updateandmodify(tid, title, description,ttype, images,introduction);
+        return talkMapper.selecttalkbyuser(id);
     }
 
     public boolean delete(Talk talk){
@@ -76,6 +76,14 @@ public class TalkService {
 
     public TalkDTO updatelikecount(Integer tid){
         Talk talk=talkMapper.selectById(tid);
+        talk.setLikecount(likeMapper.CountlikebytalkId(tid));
+        talkMapper.updateById(talk);
+        return talkMapper.selectdetailtalk(tid);
+    }
+
+    /*
+    public TalkDTO updatelikecount(Integer tid){
+        Talk talk=talkMapper.selectById(tid);
         List<LikeCountDTO> likeCountDTOS=redisUtils.getLikedCountFromRedis();
         for (LikeCountDTO likeCountDTO : likeCountDTOS) {
             if (tid == likeCountDTO.getInfoId()) {
@@ -86,7 +94,7 @@ public class TalkService {
         }
         return talkMapper.selectdetailtalk(tid);
     }
-
+*/
     public TalkDTO updatecommentcount(Integer tid){
         Talk talk=talkMapper.selectById(tid);
         List<CommentDTO> commentDTOS=commentMapper.selectCommentbytalkId(tid);

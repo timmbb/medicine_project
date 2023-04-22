@@ -12,7 +12,7 @@ import java.util.List;
 //@Repository
 @Mapper
 public interface CommentMapper extends BaseMapper<Comment> {
-    Comment updateandmodify(Integer id,String content,Integer tid);
+    CommentDTO updateandmodify(Integer id,String content,Integer tid);
 
     List<CommentDTO> selectCommentbytalkId(Integer tid);
 
