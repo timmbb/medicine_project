@@ -33,6 +33,7 @@ public class RedisUtils {
         likes.setInfoId(infoId);
         likes.setLikeUserId(likeUserId);
         likes.setStatus(1);
+        likes.setCreateTime(System.currentTimeMillis());
         likeMapper.insert(likes);
     }
 
@@ -44,8 +45,9 @@ public class RedisUtils {
         UpdateWrapper<Likes> likesUpdateWrapper=new UpdateWrapper<>();
         likesUpdateWrapper.eq("info_id",infoId);
         likesUpdateWrapper.eq("like_user_id",likeUserId);
-        likesUpdateWrapper.set("status",0);
-        likeMapper.update(null,likesUpdateWrapper);
+//        likesUpdateWrapper.set("status",0);
+//        likesUpdateWrapper.set("update_time",System.currentTimeMillis());
+        likeMapper.delete(likesUpdateWrapper);
     }
 
     public Object likeStatus(Integer infoId, Integer likeUserId) {
@@ -94,7 +96,7 @@ public class RedisUtils {
             LikeDTO userLikeDetail = new LikeDTO(infoId, likeUserId, value);
             list.add(userLikeDetail);
             //存到 list 后从 Redis 中删除
-            redisTemplate.opsForHash().delete(RedisKeyUtils.MAP_KEY_USER_LIKED, key);
+//            redisTemplate.opsForHash().delete(RedisKeyUtils.MAP_KEY_USER_LIKED, key);
         }
         return list;
     }
@@ -107,10 +109,8 @@ public class RedisUtils {
             Integer value = (Integer) map.getValue();
             LikeCountDTO userLikCountDTO = new LikeCountDTO(key, value);
             list.add(userLikCountDTO);
-            redisTemplate.opsForHash().delete(RedisKeyUtils.MAP_KEY_USER_LIKED_COUNT, key);
+//            redisTemplate.opsForHash().delete(RedisKeyUtils.MAP_KEY_USER_LIKED_COUNT, key);
         }
         return list;
     }
-
-
 }

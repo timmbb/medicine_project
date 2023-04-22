@@ -29,7 +29,7 @@ public interface TalkMapper extends BaseMapper<Talk> {
 
     List<LikeInfoDTO> selectlikebyUserid(Integer id);
 
-    List<TalkDTO> selectdetailtalk(Integer tid);
+    TalkDTO selectdetailtalk(Integer tid);
 
     List<TalkDTO> selectalltalk();
 

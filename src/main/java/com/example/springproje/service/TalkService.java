@@ -2,10 +2,10 @@ package com.example.springproje.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.springproje.bean.Talk;
 import com.example.springproje.bean.User;
-import com.example.springproje.dto.CollectionDTO;
-import com.example.springproje.dto.LikeInfoDTO;
-import com.example.springproje.dto.TalkDTO;
+import com.example.springproje.dto.*;
+import com.example.springproje.mapper.CommentMapper;
 import com.example.springproje.mapper.TalkMapper;
+import com.example.springproje.utils.RedisUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +17,10 @@ import java.util.UUID;
 public class TalkService {
     @Resource
     private TalkMapper talkMapper;
+    @Resource
+    private RedisUtils redisUtils;
+    @Resource
+    private CommentMapper commentMapper;
 
     public Talk insert(Integer id,String title, String description,String ttype, String images,String introduction){
         Talk t=new Talk();
@@ -64,9 +68,31 @@ public class TalkService {
         return talkMapper.selectlikebyUserid(id);
     }
 
-    public List<TalkDTO> detailtalk(Integer tid){
+    public TalkDTO detailtalk(Integer tid){
         return talkMapper.selectdetailtalk(tid);
     }
 
     public List<TalkDTO> selectalltalk(){return talkMapper.selectalltalk();}
+
+    public TalkDTO updatelikecount(Integer tid){
+        Talk talk=talkMapper.selectById(tid);
+        List<LikeCountDTO> likeCountDTOS=redisUtils.getLikedCountFromRedis();
+        for (LikeCountDTO likeCountDTO : likeCountDTOS) {
+            if (tid == likeCountDTO.getInfoId()) {
+                talk.setLikecount(likeCountDTO.getValue());
+                talkMapper.updateById(talk);
+                return talkMapper.selectdetailtalk(tid);
+            }
+        }
+        return talkMapper.selectdetailtalk(tid);
+    }
+
+    public TalkDTO updatecommentcount(Integer tid){
+        Talk talk=talkMapper.selectById(tid);
+        List<CommentDTO> commentDTOS=commentMapper.selectCommentbytalkId(tid);
+        talk.setCommentcount(commentDTOS.size());
+        talkMapper.updateById(talk);
+        return talkMapper.selectdetailtalk(tid);
+    }
+
 }

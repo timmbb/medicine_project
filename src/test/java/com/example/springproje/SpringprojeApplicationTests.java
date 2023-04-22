@@ -27,8 +27,8 @@ class SpringprojeApplicationTests {
     private UserMapper userMapper;
 
     @Resource
-    private UserService userService;
-//    private TalkService talkService;
+//    private UserService userService;
+    private TalkService talkService;
 
     @Resource
     private RedisUtils redisUtils;
@@ -36,8 +36,8 @@ class SpringprojeApplicationTests {
     @Test
     public void test(){
 //        redisUtils.likes(1,2);
-//        redisUtils.likes("1","1");
-//        System.out.println(redisUtils.getLikedDataFromRedis());
+//        redisUtils.likes(2,1);
+        System.out.println(talkService.updatelikecount(1).getLikecount());
     }
 
     @Test
@@ -54,7 +54,7 @@ class SpringprojeApplicationTests {
 //        List<Talk> l=talkService.Selectbyword("candy");
 //        User u=userService.register("Amy","000000","000000");
 //        List<Talk> talks=talkService.Selectbyword("运动", "happy");
-        System.out.println(userMapper.selectById('1').getSelfintroduction());
+//        System.out.println(userMapper.selectById('1').getSelfintroduction());
 //        talkService.delete(t);
 //        talkService.insert(user,"Sad","I lose my mind","/images/thumbs/image1.png");
 //        System.out.println(ta.getGmt_create());

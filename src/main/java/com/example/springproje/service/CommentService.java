@@ -35,4 +35,5 @@ public class CommentService {
     public List<CommentDTO> selectCommentbytalkId(Integer tid){
         return commentMapper.selectCommentbytalkId(tid);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.springproje.dto;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 @Data
@@ -12,8 +13,13 @@ public class TalkDTO {
     private Integer status;
     private Integer permission;
     private Integer creator;
-    private Integer comment_count;
-    private Integer like_count;
+
+    @TableField("comment_count")
+    private Integer commentcount;
+
+    @TableField("like_count")
+    private Integer likecount;
+
     private long gmt_create;
     private long gmt_modified;
     private String introduction;
