@@ -9,6 +9,7 @@ import com.example.springproje.dto.TalkDTO;
 import com.example.springproje.mapper.TalkMapper;
 import com.example.springproje.mapper.UserMapper;
 import com.example.springproje.service.TalkService;
+import com.example.springproje.service.serviceimpl.TalkServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

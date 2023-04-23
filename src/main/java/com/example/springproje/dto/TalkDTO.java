@@ -8,10 +8,7 @@ public class TalkDTO {
     private Integer tid;
     private String title;
     private String description;
-    private String images;
     private String ttype;
-    private Integer status;
-    private Integer permission;
     private Integer creator;
 
     @TableField("comment_count")
@@ -19,9 +16,12 @@ public class TalkDTO {
 
     @TableField("like_count")
     private Integer likecount;
+    @TableField("gmt_create")
+    private String gmtcreate;
 
-    private long gmt_create;
-    private long gmt_modified;
+    @TableField("gmt_modified")
+    private String gmtmodified;
+
     private String introduction;
     private String name;
 }

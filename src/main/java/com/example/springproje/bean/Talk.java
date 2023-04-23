@@ -14,10 +14,7 @@ public class Talk {
     private Integer tid;
     private String title;
     private String description;
-    private String images;
     private String ttype;
-    private Integer status;
-    private Integer permission;
     private Integer creator;
 
     @TableField("comment_count")
@@ -25,7 +22,12 @@ public class Talk {
 
     @TableField("like_count")
     private Integer likecount;
-    private long gmt_create;
-    private long gmt_modified;
+
+    @TableField("gmt_create")
+    private String gmtcreate;
+
+    @TableField("gmt_modified")
+    private String gmtmodified;
+
     private String introduction;
 }

@@ -13,11 +13,11 @@ import lombok.Setter;
 public class User {
     @TableId()
     private Integer id;
-    private String account_id;
     private String name;
     private String token;
-    private String  gmt_create;
-    private String avatar_url;
+    @TableField("gmt_create")
+    private String gmtcreate;
+
     private String email;
     private String phone;
     private String password;

@@ -9,7 +9,7 @@ import com.example.springproje.annotation.LoginToken;
 import com.example.springproje.annotation.PassToken;
 import com.example.springproje.bean.User;
 import com.example.springproje.mapper.UserMapper;
-import com.example.springproje.service.UserService;
+import com.example.springproje.service.serviceimpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 public class JwtInterceptor implements HandlerInterceptor{
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private UserMapper userMapper;

@@ -1,7 +1,5 @@
 package com.example.springproje.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.springproje.annotation.CurrentUserId;
 import com.example.springproje.bean.User;
@@ -9,14 +7,10 @@ import com.example.springproje.dto.ResultDTO;
 import com.example.springproje.mapper.UserMapper;
 import com.example.springproje.service.TokenService;
 import com.example.springproje.service.UserService;
-import netscape.javascript.JSObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 
 @Controller

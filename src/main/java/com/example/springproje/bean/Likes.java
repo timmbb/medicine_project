@@ -1,5 +1,6 @@
 package com.example.springproje.bean;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -11,11 +12,10 @@ public class Likes {
 
     private Integer infoId;
 
-    private long createTime;
+    @TableField("create_time")
+    private String createTime;
 
     private Integer likeUserId;
-
-    private long updateTime;
 
     private Integer status;
 }

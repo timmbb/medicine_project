@@ -3,7 +3,7 @@
 <mapper namespace="com.example.springproje.mapper.CommentMapper">
     <update id="updateandmodify">
         update comment
-        set  content=#{content},gmt_modified=unix_timestamp()
+        set  content=#{content},gmt_modified=now()
         where commentator=#{id} and parent_id=#{tid}
     </update>
 

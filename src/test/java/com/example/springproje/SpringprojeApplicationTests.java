@@ -1,23 +1,14 @@
 package com.example.springproje;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.springproje.bean.Talk;
-import com.example.springproje.bean.User;
-import com.example.springproje.mapper.CommentMapper;
 import com.example.springproje.mapper.LikeMapper;
-import com.example.springproje.mapper.TalkMapper;
 import com.example.springproje.mapper.UserMapper;
-import com.example.springproje.service.LikeService;
-import com.example.springproje.service.TalkService;
-import com.example.springproje.service.UserService;
 import com.example.springproje.utils.RedisUtils;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @SpringBootTest
 class SpringprojeApplicationTests {
@@ -60,6 +51,9 @@ class SpringprojeApplicationTests {
 //        talkService.delete(t);
 //        talkService.insert(user,"Sad","I lose my mind","/images/thumbs/image1.png");
 //        System.out.println(ta.getGmt_create());
+        Date date=new Date();
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println(df.format(date));
     }
 
 }

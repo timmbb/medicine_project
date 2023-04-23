@@ -14,7 +14,9 @@ import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,10 +32,12 @@ public class RedisUtils {
         redisTemplate.opsForHash().increment(RedisKeyUtils.MAP_KEY_USER_LIKED_COUNT, infoId, 1);
         redisTemplate.opsForHash().put(RedisKeyUtils.MAP_KEY_USER_LIKED, likedKey, LikeStatusEnum.LIKE.getCode());
         Likes likes=new Likes();
+        Date date=new Date();
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         likes.setInfoId(infoId);
         likes.setLikeUserId(likeUserId);
         likes.setStatus(1);
-        likes.setCreateTime(System.currentTimeMillis());
+        likes.setCreateTime(df.format(date));
         likeMapper.insert(likes);
     }
 

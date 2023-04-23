@@ -3,17 +3,16 @@ package com.example.springproje.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.springproje.annotation.CurrentUserId;
 import com.example.springproje.bean.Collections;
-import com.example.springproje.dto.CollectionDTO;
 import com.example.springproje.dto.ResultDTO;
 import com.example.springproje.mapper.CollectionsMapper;
 import com.example.springproje.service.CollectionsService;
 import com.example.springproje.service.TalkService;
-import io.swagger.models.auth.In;
+import com.example.springproje.service.serviceimpl.CollectionsServiceImpl;
+import com.example.springproje.service.serviceimpl.TalkServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Collection;
 
 @Controller
 public class CollectionsController {
