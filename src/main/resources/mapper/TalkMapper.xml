@@ -28,7 +28,7 @@
     </select>
 
     <select id="selectCollectiontalkbyUserid" resultType="com.example.springproje.dto.CollectionDTO">
-        select distinct talk.tid,talk.creator,users.name,talk.title,talk.introduction
+        select distinct talk.tid,talk.creator,users.name,talk.title,talk.introduction,talk.ttype
         from users,talk,collection
         where collection.user_id=#{id}
         and talk.tid=collection.post_id
@@ -36,7 +36,7 @@
     </select>
 
     <select id="selectlikebyUserid" resultType="com.example.springproje.dto.LikeInfoDTO">
-        select distinct talk.tid,talk.creator,users.name,talk.title,talk.introduction
+        select distinct talk.tid,talk.creator,users.name,talk.title,talk.introduction,talk.ttype
         from users,talk,likes
         where likes.like_user_id=#{id}
         and talk.tid=likes.info_id

@@ -9,4 +9,17 @@ public class CollectionDTO {
     private String name;
     private String title;
     private String introduction;
+    private String ttype;
+
+    @Override
+    public String toString(){
+        return "{" +
+                "'tid'" +":'"+ tid +"',"+
+                "'creator'" + ":'"+creator + "',"+
+                "'name'" + ":'"+name +"',"+
+                "'title'" + ":'"+title + "',"+
+                "'introduction'" + ":'"+introduction + "',"+
+                "'ttype'" + ":'"+ttype + "',"+
+                '}';
+    }
 }

@@ -5,6 +5,7 @@ import com.example.springproje.dto.CollectionDTO;
 import com.example.springproje.dto.LikeInfoDTO;
 import com.example.springproje.dto.TalkDTO;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface TalkService {
@@ -17,6 +18,8 @@ public interface TalkService {
     public List<Talk> Orderbylike();
 
     public List<Talk> Orderbycomment();
+
+    public List<TalkDTO> Orderbypredict(Integer id) throws IOException;
 
     public List<TalkDTO> Selectbyword(String typeword,String descripword);
 

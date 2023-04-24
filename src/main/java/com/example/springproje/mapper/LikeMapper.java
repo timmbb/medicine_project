@@ -10,6 +10,11 @@ import java.util.List;
 
 @Mapper
 public interface LikeMapper extends BaseMapper<Likes> {
+    /**
+     * 根据话题id返回此话题点赞数量
+     * @param tid
+     * @return
+     */
     Integer CountlikebytalkId(Integer tid);
 
 }

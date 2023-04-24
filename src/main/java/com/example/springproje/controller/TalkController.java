@@ -12,10 +12,12 @@ import com.example.springproje.service.TalkService;
 import com.example.springproje.service.serviceimpl.TalkServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -93,8 +95,8 @@ public class TalkController {
      */
     @ResponseBody
     @GetMapping(value = "/all_talk")
-    public ResultDTO alltalk(){
-        List<TalkDTO> talks=talkService.selectalltalk();
+    public ResultDTO alltalk(@Validated @CurrentUserId Integer id) throws IOException {
+        List<TalkDTO> talks=talkService.Orderbypredict(id);
         return ResultDTO.okOf(talks);
     }
 
@@ -102,5 +104,11 @@ public class TalkController {
     @ResponseBody
     public ResultDTO detailoftalk(Integer tid){
         return ResultDTO.okOf(talkMapper.selectdetailtalk(tid));
+    }
+
+    @PostMapping(value = "/predict_talk")
+    @ResponseBody
+    public ResultDTO predicttalk(@CurrentUserId Integer id){
+        return ResultDTO.okOf();
     }
 }

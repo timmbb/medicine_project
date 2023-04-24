@@ -1,6 +1,7 @@
 import math
 import pandas as pd
 import numpy as np
+import sys
 # import os
 #
 # os.chdir('')
@@ -123,29 +124,30 @@ def printRecommendedItems(recommend_items_sorted, max_num):
 
 
 # 主程序
-def recom():
+def recom(like_talk,collect_talk,all_talk):
     #类别
-    all_labels = ['运动','饮食','医疗','养生','心理']
+    all_labels = ['运动','饮食','医药','养生','心理']
     #点赞的帖子，你按下面这个格式来
-    like_talk=[{'title':'1','type':'运动'},{'title':'2','type':'运动'},{'title':'3','type':'心理'}]
+    #like_talk=[{'title':'1','type':'运动'},{'title':'2','type':'运动'},{'title':'3','type':'心理'}]
     #收藏的帖子
-    collect_talk=[{'title':'1','type':'运动'},{'title':'2','type':'运动'}]
+    #collect_talk=[{'title':'1','type':'运动'},{'title':'2','type':'运动'}]
     user_talk=[]
     user_talk_score=[]
     for i in like_talk:
-        user_talk.append(i['title'])
+        # print(list(i.values())[0], type(i['tid']),i['tid'])
+        user_talk.append(i['tid'])
     for i in collect_talk:
-        if(i['title'] not in user_talk):
-            user_talk.append(i['title'])
+        if(i['tid'] not in user_talk):
+            user_talk.append(i['tid'])
     for i in range(len(user_talk)):
         user_talk_score.append([0,0,0,0,0])
     for i in range(len(user_talk)):
         for j in like_talk:
-            if user_talk[i]==j['title']:
-                user_talk_score[i][all_labels.index(j['type'])]+=1
+            if user_talk[i]==j['tid']:
+                user_talk_score[i][all_labels.index(j['ttype'])]+=1
         for j in collect_talk:
-            if user_talk[i]==j['title']:
-                user_talk_score[i][all_labels.index(j['type'])]+=1
+            if user_talk[i]==j['tid']:
+                user_talk_score[i][all_labels.index(j['ttype'])]+=1
     item_user_talk_profiles=createItemsProfiles(user_talk_score,all_labels,user_talk)
     data_array=[]
     for i in user_talk_score:
@@ -157,19 +159,31 @@ def recom():
     users_profiles= createUsersProfiles(data_array,  user_talk,
                                      all_labels, item_user_talk_profiles)
     #全部的帖子
-    all_talk=[{'title':'1','type':'运动'},{'title':'2','type':'运动'},{'title':'3','type':'心理'},
-              {'title': '4', 'type': '运动'}, {'title': '5', 'type': '运动'}, {'title': '6', 'type': '心理'}]
+    #all_talk=[{'title':'1','type':'运动'},{'title':'2','type':'运动'},{'title':'3','type':'心理'},
+     #         {'title': '4', 'type': '运动'}, {'title': '5', 'type': '运动'}, {'title': '6', 'type': '心理'}]
     all_talk_name = []
     all_talk_score = []
     for i in all_talk:
-        all_talk_name.append(i['title'])
+        all_talk_name.append(i['tid'])
     for i in range(len(all_talk_name)):
         all_talk_score.append([0, 0, 0, 0, 0])
     for i in range(len(all_talk_name)):
-        all_talk_score[i][all_labels.index(all_talk[i]['type'])] += 1
+        all_talk_score[i][all_labels.index(all_talk[i]['ttype'])] += 1
     items_to_be_recommended_profiles = createItemsProfiles(all_talk_score, all_labels, all_talk_name)
-    print(items_to_be_recommended_profiles)
     recommend_items = contentBased(users_profiles, items_to_be_recommended_profiles,
                                    all_talk_name, all_labels, user_talk)
-    printRecommendedItems(recommend_items, 5)
-recom()
+    recommend_items_str=''
+    for i in range (len(recommend_items)):
+        recommend_items_str+=str(recommend_items[i][0])
+    for i in range(len(user_talk)):
+        recommend_items_str+=user_talk[i]
+    print(recommend_items_str)
+    # print(user_talk)
+    return recommend_items_str
+
+if __name__ == '__main__':
+    like_talk=eval(sys.argv[1])
+    collect_talk=eval(sys.argv[2])
+    all_talk=eval(sys.argv[3])
+    #print(all_talk)
+    recom(like_talk,collect_talk,all_talk)

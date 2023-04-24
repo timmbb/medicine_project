@@ -6,15 +6,16 @@ import com.example.springproje.dto.*;
 import com.example.springproje.mapper.CommentMapper;
 import com.example.springproje.mapper.LikeMapper;
 import com.example.springproje.mapper.TalkMapper;
+import com.example.springproje.service.PythonService;
 import com.example.springproje.service.TalkService;
 import com.example.springproje.utils.RedisUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -27,6 +28,8 @@ public class TalkServiceImpl implements TalkService {
     private CommentMapper commentMapper;
     @Resource
     private LikeMapper likeMapper;
+    @Resource
+    private PythonService pythonService;
 
     public Talk insert(Integer id,String title, String description,String ttype, String images,String introduction){
         Talk t=new Talk();
@@ -107,4 +110,23 @@ public class TalkServiceImpl implements TalkService {
         return talkMapper.selectdetailtalk(tid);
     }
 
+    /**
+     * 根据用户id的按照收藏和点赞进行推荐排序
+     * @param id
+     * @return
+     * @throws IOException
+     */
+    public List<TalkDTO> Orderbypredict(Integer id) throws IOException {
+        List<LikeInfoDTO> like_talk=talkMapper.selectlikebyUserid(id);
+        List<CollectionDTO> collect_talk=talkMapper.selectCollectiontalkbyUserid(id);
+        List<TalkDTO> all_talk=talkMapper.selectalltalk();
+
+        String orderstr=pythonService.modelpredict(like_talk,collect_talk,all_talk);
+        char[] orderlist=orderstr.toCharArray();
+
+        for (int i=0;i<orderlist.length;i++) {
+            all_talk.set(i,talkMapper.selectdetailtalk(Character.getNumericValue(orderlist[i])));
+        }
+        return all_talk;
+    }
 }

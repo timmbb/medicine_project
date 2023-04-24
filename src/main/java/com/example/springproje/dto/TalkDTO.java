@@ -24,4 +24,21 @@ public class TalkDTO {
 
     private String introduction;
     private String name;
+
+    @Override
+    public String toString(){
+        return "{" +
+                "'tid'" +":'"+ tid +"',"+
+                "'title'" + ":'"+title + "',"+
+                "'description'" + ":'"+description + "',"+
+                "'ttype'" + ":'"+ttype + "',"+
+                "'creator'" + ":'"+creator + "',"+
+                "'commentcount'" + ":'"+commentcount + "',"+
+                "'likecount'" + ":'"+likecount + "',"+
+                "'gmtcreate'" + ":'"+gmtcreate + "',"+
+                "'gmtmodified'" + ":'"+gmtmodified + "',"+
+                "'introduction'" + ":'"+introduction + "',"+
+                "'name'" + ":'"+name +"'"+
+                '}';
+    }
 }

@@ -1,14 +1,18 @@
 package com.example.springproje;
 
+import com.example.springproje.dto.CollectionDTO;
+import com.example.springproje.dto.LikeInfoDTO;
+import com.example.springproje.dto.TalkDTO;
 import com.example.springproje.mapper.LikeMapper;
 import com.example.springproje.mapper.UserMapper;
-import com.example.springproje.utils.RedisUtils;
+import com.example.springproje.service.PythonService;
+import com.example.springproje.service.TalkService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.IOException;
+import java.util.List;
 
 @SpringBootTest
 class SpringprojeApplicationTests {
@@ -20,11 +24,13 @@ class SpringprojeApplicationTests {
     private UserMapper userMapper;
 
     @Resource
+    private PythonService pythonService;
+    @Resource
     private LikeMapper likeMapper;
 //    private UserService userService;
-//    private TalkService talkService;
     @Resource
-    private RedisUtils redisUtils;
+    private TalkService talkService;
+    private Object List;
 
     @Test
     public void test(){
@@ -34,7 +40,7 @@ class SpringprojeApplicationTests {
     }
 
     @Test
-    void contextLoads() {
+    void contextLoads() throws IOException {
 //        User user=new User();
 //        user.setName("Judy");
 //        user.setPassword("000000");
@@ -51,9 +57,16 @@ class SpringprojeApplicationTests {
 //        talkService.delete(t);
 //        talkService.insert(user,"Sad","I lose my mind","/images/thumbs/image1.png");
 //        System.out.println(ta.getGmt_create());
-        Date date=new Date();
-        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println(df.format(date));
+//        List<LikeInfoDTO> like_talk=talkService.selectlikebyUserid(1);
+//        List<CollectionDTO> collect_talk=talkService.selectCollectiontalkbyUserid(1);
+//        List<TalkDTO> all_talk=talkService.selectalltalk();
+//        System.out.println(like_talk);
+//        System.out.println(collect_talk);
+//        System.out.println(all_talk);
+//        System.out.println(pythonService.modelpredict(like_talk,collect_talk,all_talk));
+//        char i='1';
+//        System.out.println(Character.getNumericValue(i));
+//        System.out.println(talkService.Orderbypredict(1));
     }
 
 }
