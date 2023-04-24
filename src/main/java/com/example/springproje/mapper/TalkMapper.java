@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper
 public interface TalkMapper extends BaseMapper<Talk> {
 
-    Integer updateandmodify(Integer tid, String title, String description,String ttype, String images,String introduction);
+    Integer updateandmodify(Integer tid, String title, String description,String ttype,String introduction);
 
     List<Talk> Orderbylike();
 

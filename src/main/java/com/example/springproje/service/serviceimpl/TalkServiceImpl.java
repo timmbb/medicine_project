@@ -31,7 +31,7 @@ public class TalkServiceImpl implements TalkService {
     @Resource
     private PythonService pythonService;
 
-    public Talk insert(Integer id,String title, String description,String ttype, String images,String introduction){
+    public Talk insert(Integer id,String title, String description,String ttype,String introduction){
         Talk t=new Talk();
         Date date=new Date();
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -41,12 +41,13 @@ public class TalkServiceImpl implements TalkService {
         t.setIntroduction(introduction);
         t.setCreator(id);
         t.setGmtcreate(df.format(date));
+        t.setGmtmodified(df.format(date));
         talkMapper.insert(t);
         return t;
     }
-    public List<TalkDTO> update(Integer id,Integer tid,String title, String description,String ttype, String images,String introduction){
+    public List<TalkDTO> update(Integer id,Integer tid,String title, String description,String ttype,String introduction){
         Talk talk=talkMapper.selectById(tid);
-        talkMapper.updateandmodify(tid, title, description,ttype, images,introduction);
+        talkMapper.updateandmodify(tid, title, description,ttype, introduction);
         return talkMapper.selecttalkbyuser(id);
     }
 

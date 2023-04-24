@@ -25,6 +25,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setCommentator(id);
         comment.setParent_id(tid);
         comment.setGmtcreate(df.format(date));
+        comment.setGmtmodified(df.format(date));
         commentMapper.insert(comment);
         return comment;
     }

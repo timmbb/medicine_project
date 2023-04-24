@@ -9,10 +9,8 @@ import com.example.springproje.dto.TalkDTO;
 import com.example.springproje.mapper.TalkMapper;
 import com.example.springproje.mapper.UserMapper;
 import com.example.springproje.service.TalkService;
-import com.example.springproje.service.serviceimpl.TalkServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,18 +31,18 @@ public class TalkController {
 
     @ResponseBody
     @RequestMapping(value = "/add_talk",method = RequestMethod.POST)
-    public ResultDTO add_talk(@CurrentUserId Integer id, String title, String description,String ttype, String images, String introduction, Model model, HttpSession session)//
+    public ResultDTO add_talk(@CurrentUserId Integer id, String title, String description,String ttype, String introduction)//
     {
 //        User user = userMapper.selectById(id);
-        Talk talk=talkService.insert(id,title,description,ttype,images,introduction);
+        Talk talk=talkService.insert(id,title,description,ttype,introduction);
         return ResultDTO.okOf(talk);
     }
 
     @ResponseBody
     @RequestMapping(value = "/update_talk",method = RequestMethod.POST)
-    public Object update_talk(@CurrentUserId Integer id, Integer tid, String title, String description,String ttype, String images,String introduction)//
+    public Object update_talk(@CurrentUserId Integer id, Integer tid, String title, String description,String ttype,String introduction)//
     {
-        return ResultDTO.okOf(talkService.update(id,tid,title,description,ttype,images,introduction));
+        return ResultDTO.okOf(talkService.update(id,tid,title,description,ttype,introduction));
     }
 
     @ResponseBody
@@ -95,7 +93,7 @@ public class TalkController {
      */
     @ResponseBody
     @GetMapping(value = "/all_talk")
-    public ResultDTO alltalk(@Validated @CurrentUserId Integer id) throws IOException {
+    public ResultDTO alltalk(@CurrentUserId Integer id) throws IOException {
         List<TalkDTO> talks=talkService.Orderbypredict(id);
         return ResultDTO.okOf(talks);
     }

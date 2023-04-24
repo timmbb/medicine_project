@@ -3,7 +3,7 @@
 <mapper namespace="com.example.springproje.mapper.TalkMapper">
     <update id="updateandmodify">
         update talk
-        set  title=#{title},description=#{description},ttype=#{ttype},images=#{images},gmt_modified=now(),introduction=#{introduction}
+        set  title=#{title},description=#{description},ttype=#{ttype},gmt_modified=now(),introduction=#{introduction}
         where tid=#{tid}
     </update>
 

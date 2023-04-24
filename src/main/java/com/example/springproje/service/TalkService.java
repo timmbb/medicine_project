@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.List;
 
 public interface TalkService {
-    public Talk insert(Integer id, String title, String description, String ttype, String images, String introduction);
+    public Talk insert(Integer id, String title, String description, String ttype, String introduction);
 
-    public List<TalkDTO> update(Integer id, Integer tid, String title, String description, String ttype, String images, String introduction);
+    public List<TalkDTO> update(Integer id, Integer tid, String title, String description, String ttype, String introduction);
 
     public boolean delete(Talk talk);
 
