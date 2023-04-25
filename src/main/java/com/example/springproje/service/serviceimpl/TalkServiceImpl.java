@@ -8,8 +8,6 @@ import com.example.springproje.mapper.LikeMapper;
 import com.example.springproje.mapper.TalkMapper;
 import com.example.springproje.service.PythonService;
 import com.example.springproje.service.TalkService;
-import com.example.springproje.utils.RedisUtils;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,8 +20,6 @@ import java.util.*;
 public class TalkServiceImpl implements TalkService {
     @Resource
     private TalkMapper talkMapper;
-    @Resource
-    private RedisUtils redisUtils;
     @Resource
     private CommentMapper commentMapper;
     @Resource

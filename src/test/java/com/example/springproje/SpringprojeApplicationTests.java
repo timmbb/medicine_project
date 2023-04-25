@@ -30,7 +30,6 @@ class SpringprojeApplicationTests {
 //    private UserService userService;
     @Resource
     private TalkService talkService;
-    private Object List;
 
     @Test
     public void test(){

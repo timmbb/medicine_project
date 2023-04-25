@@ -51,7 +51,7 @@ public class PythonServiceImpl implements PythonService {
     }
 
     /**
-     *
+     *得到python推荐算法结果
      * @throws IOException
      */
     public String modelpredict(List<LikeInfoDTO> like_talk, List<CollectionDTO> collect_talk, List<TalkDTO> all_talk) throws IOException{
