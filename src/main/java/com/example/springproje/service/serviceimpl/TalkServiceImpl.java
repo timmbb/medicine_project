@@ -119,10 +119,11 @@ public class TalkServiceImpl implements TalkService {
         List<TalkDTO> all_talk=talkMapper.selectalltalk();
 
         String orderstr=pythonService.modelpredict(like_talk,collect_talk,all_talk);
-        char[] orderlist=orderstr.toCharArray();
+        String[] orderlist=orderstr.split(",");
 
         for (int i=0;i<orderlist.length;i++) {
-            all_talk.set(i,talkMapper.selectdetailtalk(Character.getNumericValue(orderlist[i])));
+            all_talk.set(i,talkMapper.selectdetailtalk(Integer.parseInt(orderlist[i])));
+//            System.out.println(all_talk);
         }
         return all_talk;
     }

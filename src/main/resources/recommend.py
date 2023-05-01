@@ -1,3 +1,4 @@
+#coding:utf-8
 import math
 import pandas as pd
 import numpy as np
@@ -175,9 +176,11 @@ def recom(like_talk,collect_talk,all_talk):
     recommend_items_str=''
     for i in range (len(recommend_items)):
         recommend_items_str+=str(recommend_items[i][0])
+        recommend_items_str+=','
     for i in range(len(user_talk)):
         recommend_items_str+=user_talk[i]
-    print(recommend_items_str)
+        recommend_items_str += ','
+    #print(recommend_items_str)
     # print(user_talk)
     return recommend_items_str
 
@@ -186,4 +189,5 @@ if __name__ == '__main__':
     collect_talk=eval(sys.argv[2])
     all_talk=eval(sys.argv[3])
     #print(all_talk)
-    recom(like_talk,collect_talk,all_talk)
+    lis1=recom(like_talk,collect_talk,all_talk)
+    print(lis1)

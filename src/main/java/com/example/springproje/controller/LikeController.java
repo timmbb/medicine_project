@@ -25,7 +25,6 @@ public class LikeController {
     @DeleteMapping("/remove_like")
     @ResponseBody
     public Object removeLike(@CurrentUserId Integer id,Integer tid) {
-//        redisUtils.unLikes(tid,id);
         likeService.remove(tid,id);
         return ResultDTO.okOf(talkService.updatelikecount(tid));
     }

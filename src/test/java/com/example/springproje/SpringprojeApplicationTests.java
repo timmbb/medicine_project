@@ -8,6 +8,7 @@ import com.example.springproje.mapper.UserMapper;
 import com.example.springproje.service.PythonService;
 import com.example.springproje.service.TalkService;
 import org.junit.jupiter.api.Test;
+import org.python.antlr.ast.Str;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -56,16 +57,23 @@ class SpringprojeApplicationTests {
 //        talkService.delete(t);
 //        talkService.insert(user,"Sad","I lose my mind","/images/thumbs/image1.png");
 //        System.out.println(ta.getGmt_create());
-//        List<LikeInfoDTO> like_talk=talkService.selectlikebyUserid(1);
-//        List<CollectionDTO> collect_talk=talkService.selectCollectiontalkbyUserid(1);
-//        List<TalkDTO> all_talk=talkService.selectalltalk();
+        List<LikeInfoDTO> like_talk=talkService.selectlikebyUserid(1);
+        List<CollectionDTO> collect_talk=talkService.selectCollectiontalkbyUserid(1);
+        List<TalkDTO> all_talk=talkService.selectalltalk();
 //        System.out.println(like_talk);
 //        System.out.println(collect_talk);
 //        System.out.println(all_talk);
-//        System.out.println(pythonService.modelpredict(like_talk,collect_talk,all_talk));
+        pythonService.modelpredicttest(like_talk,collect_talk,all_talk);
+//        String str1=pythonService.modelpredict(like_talk,collect_talk,all_talk);
+//        String[] ll=str1.split(",");
+//        for (int i=0;i<ll.length;i++)
+//            System.out.println(ll[i]);
+//        System.out.println(ll.length);
 //        char i='1';
 //        System.out.println(Character.getNumericValue(i));
 //        System.out.println(talkService.Orderbypredict(1));
+//        List<TalkDTO> ll=talkService.Orderbypredict(1);
+//        System.out.println(ll);
     }
 
 }

@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.springproje.annotation.CurrentUserId;
 import com.example.springproje.bean.Talk;
 import com.example.springproje.bean.User;
+import com.example.springproje.dto.CollectionDTO;
+import com.example.springproje.dto.LikeInfoDTO;
 import com.example.springproje.dto.ResultDTO;
 import com.example.springproje.dto.TalkDTO;
 import com.example.springproje.mapper.TalkMapper;
 import com.example.springproje.mapper.UserMapper;
+import com.example.springproje.service.PythonService;
 import com.example.springproje.service.TalkService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,8 @@ import java.util.List;
 public class TalkController {
     @Resource
     private TalkService talkService;
-
+    @Resource
+    private PythonService pythonService;
     @Resource
     private TalkMapper talkMapper;
 
@@ -94,8 +98,12 @@ public class TalkController {
     @ResponseBody
     @GetMapping(value = "/all_talk")
     public ResultDTO alltalk(@CurrentUserId Integer id) throws IOException {
-        List<TalkDTO> talks=talkService.Orderbypredict(id);
-        return ResultDTO.okOf(talks);
+        List<LikeInfoDTO> like_talk=talkService.selectlikebyUserid(id);
+        List<CollectionDTO> collect_talk=talkService.selectCollectiontalkbyUserid(id);
+        List<TalkDTO> all_talk=talkService.selectalltalk();
+        pythonService.modelpredicttest(like_talk,collect_talk,all_talk);
+        List< TalkDTO> talkDTOS=talkService.Orderbypredict(id);
+        return ResultDTO.okOf(talkDTOS);
     }
 
     @GetMapping(value = "/detail_talk")
@@ -104,9 +112,4 @@ public class TalkController {
         return ResultDTO.okOf(talkMapper.selectdetailtalk(tid));
     }
 
-    @PostMapping(value = "/predict_talk")
-    @ResponseBody
-    public ResultDTO predicttalk(@CurrentUserId Integer id){
-        return ResultDTO.okOf();
-    }
 }
