@@ -23,9 +23,8 @@ public class PythonServiceImpl implements PythonService {
      * @throws IOException
      */
     public void modelpredicttest(List<LikeInfoDTO> like_talk, List<CollectionDTO> collect_talk, List<TalkDTO> all_talk) throws IOException{
-//        Connection connection=new Connection("8.130.28.151",22);
             //前面一半是本地环境下的python的启动文件地址，后面一半是要执行的python脚本地址
-            String[] arguments = new String[] {"python", "/www/wwwroot/medicine8081/recommend.py",
+            String[] arguments = new String[] {"/usr/bin/python", "./recommend.py",
                     String.valueOf(like_talk),String.valueOf(collect_talk),String.valueOf(all_talk)};
             Process proc;
             try {

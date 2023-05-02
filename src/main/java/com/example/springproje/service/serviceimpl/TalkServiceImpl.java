@@ -118,13 +118,17 @@ public class TalkServiceImpl implements TalkService {
         List<CollectionDTO> collect_talk=talkMapper.selectCollectiontalkbyUserid(id);
         List<TalkDTO> all_talk=talkMapper.selectalltalk();
 
-        String orderstr=pythonService.modelpredict(like_talk,collect_talk,all_talk);
-        String[] orderlist=orderstr.split(",");
+        if(like_talk.isEmpty() && collect_talk.isEmpty())
+            return all_talk;
+        else {
+            String orderstr=pythonService.modelpredict(like_talk,collect_talk,all_talk);
+            String[] orderlist=orderstr.split(",");
 
-        for (int i=0;i<orderlist.length;i++) {
-            all_talk.set(i,talkMapper.selectdetailtalk(Integer.parseInt(orderlist[i])));
+            for (int i=0;i<orderlist.length;i++) {
+                all_talk.set(i,talkMapper.selectdetailtalk(Integer.parseInt(orderlist[i])));
 //            System.out.println(all_talk);
+            }
+            return all_talk;
         }
-        return all_talk;
     }
 }

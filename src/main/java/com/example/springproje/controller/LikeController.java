@@ -25,16 +25,13 @@ public class LikeController {
     @DeleteMapping("/remove_like")
     @ResponseBody
     public Object removeLike(@CurrentUserId Integer id,Integer tid) {
-        likeService.remove(tid,id);
-        return ResultDTO.okOf(talkService.updatelikecount(tid));
+        return ResultDTO.okOf(likeService.remove(tid,id));
     }
 
     @PostMapping("/insert_like")
     @ResponseBody
     public Object insertLike(@CurrentUserId Integer id, Integer tid) {
-//        redisUtils.likes(tid,id);
-        likeService.insert(tid,id);
-        return ResultDTO.okOf(talkService.updatelikecount(tid));
+        return ResultDTO.okOf(likeService.insert(tid,id));
     }
 
     @GetMapping(value = "/selectlikebyuser")

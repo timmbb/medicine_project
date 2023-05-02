@@ -92,16 +92,12 @@ public class TalkController {
     }
 
     /**
-     * 显示所有话题
+     * 按照推荐算法显示所有话题
      * @return
      */
     @ResponseBody
     @GetMapping(value = "/all_talk")
     public ResultDTO alltalk(@CurrentUserId Integer id) throws IOException {
-        List<LikeInfoDTO> like_talk=talkService.selectlikebyUserid(id);
-        List<CollectionDTO> collect_talk=talkService.selectCollectiontalkbyUserid(id);
-        List<TalkDTO> all_talk=talkService.selectalltalk();
-        pythonService.modelpredicttest(like_talk,collect_talk,all_talk);
         List< TalkDTO> talkDTOS=talkService.Orderbypredict(id);
         return ResultDTO.okOf(talkDTOS);
     }

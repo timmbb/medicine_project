@@ -57,14 +57,14 @@ class SpringprojeApplicationTests {
 //        talkService.delete(t);
 //        talkService.insert(user,"Sad","I lose my mind","/images/thumbs/image1.png");
 //        System.out.println(ta.getGmt_create());
-        List<LikeInfoDTO> like_talk=talkService.selectlikebyUserid(1);
-        List<CollectionDTO> collect_talk=talkService.selectCollectiontalkbyUserid(1);
-        List<TalkDTO> all_talk=talkService.selectalltalk();
-//        System.out.println(like_talk);
+//        List<LikeInfoDTO> like_talk=talkService.selectlikebyUserid(17);
+//        List<CollectionDTO> collect_talk=talkService.selectCollectiontalkbyUserid(17);
+//        List<TalkDTO> all_talk=talkService.selectalltalk();
+//        System.out.println(like_talk.isEmpty());
 //        System.out.println(collect_talk);
 //        System.out.println(all_talk);
-        pythonService.modelpredicttest(like_talk,collect_talk,all_talk);
-//        String str1=pythonService.modelpredict(like_talk,collect_talk,all_talk);
+//        pythonService.modelpredicttest(like_talk,collect_talk,all_talk);
+//        System.out.println(pythonService.modelpredict(like_talk,collect_talk,all_talk));
 //        String[] ll=str1.split(",");
 //        for (int i=0;i<ll.length;i++)
 //            System.out.println(ll[i]);
